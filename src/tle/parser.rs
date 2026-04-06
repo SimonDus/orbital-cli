@@ -1,24 +1,49 @@
+use crate::cli::PositionArgs;
 use crate::domain::Satellite;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Error};
 use itertools::Itertools;
 
-pub fn parse_tle_file(path: &str) -> Result<Vec<Satellite>, Error> {
-    let tle_file = File::open(path)?;
+#[allow(unused)]
+pub fn parse_full_tle_file(args: PositionArgs) -> Result<Vec<Satellite>, Error> {
+    let tle_file = File::open(&args.tle)?;
     let reader = BufReader::new(tle_file);
     let mut satellites_vec: Vec<Satellite> = Vec::new();
 
-    for chunk in &reader.lines().take(3).chunks(3) {
+    for chunk in &reader.lines().chunks(3) {
         let lines: Vec<String> = chunk.filter_map(Result::ok).collect();
 
         if lines.len() == 3 {
             let sat = Satellite {
-                name: lines[0].clone(),
-                line_1: lines[1].clone(),
-                line_2: lines[2].clone(),
+                name: lines[0].clone().trim().to_string(),
+                line_1: lines[1].clone().trim().to_string(),
+                line_2: lines[2].clone().trim().to_string(),
             };
             satellites_vec.push(sat);
         }
     }
     Ok(satellites_vec)
+}
+
+
+pub fn parse_tle_file(args: &PositionArgs) -> Result<Vec<Satellite>, Error> {
+    let tle_file = File::open(&args.tle)?;
+    let reader = BufReader::new(tle_file);
+    let mut satellites_vec: Vec<Satellite> = Vec::new();
+
+    for chunk in &reader.lines().chunks(3) {
+        let lines: Vec<String> = chunk.filter_map(Result::ok).collect();
+
+        if lines.len() == 3 && lines[0].clone().trim() == args.name{
+            let sat = Satellite {
+                name: lines[0].clone().trim().to_string(),
+                line_1: lines[1].clone().trim().to_string(),
+                line_2: lines[2].clone().trim().to_string(),
+            };
+            satellites_vec.push(sat);
+            
+        }
+    }
+    Ok(satellites_vec)
+    // Err(format!("No satellite found with the given name {}", args.name))
 }

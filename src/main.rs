@@ -9,7 +9,7 @@ fn main() {
 
     match &cli.command {
         cli::Commands::Position(args) => {
-            println!("from main: {:?}", parse_tle_file(&args.tle));
+            println!("from main: {:?}", parse_tle_file(args));
         }
     }
 }

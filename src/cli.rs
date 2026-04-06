@@ -18,14 +18,17 @@ pub struct PositionArgs {
     #[arg(long)]
     pub tle: String,
 
-    #[arg(long)]
-    pub lat: f64,
+    // #[arg(long)]
+    // pub lat: f64,
+
+    // #[arg(long)]
+    // pub lon: f64,
+
+    // #[arg(long)]
+    // pub alt: f64,
 
     #[arg(long)]
-    pub lon: f64,
-
-    #[arg(long)]
-    pub alt: f64,
+    pub name: String,
 }
 
 pub fn parse() -> Cli {

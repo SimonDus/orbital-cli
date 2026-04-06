@@ -1,13 +1,13 @@
 #[derive(Debug, Clone)]
-struct Satellite {
-    name: String,
-    line_1: String,
-    line_2: String,
+pub struct Satellite {
+    pub name: String,
+    pub line_1: String,
+    pub line_2: String,
 }
 
 #[derive(Debug, Clone)]
-struct GroundStation {
-    latitude: f64,
-    longitude: f64,
-    altitude: f64,
+pub struct GroundStation {
+    pub latitude: f64,
+    pub longitude: f64,
+    pub altitude: f64,
 }

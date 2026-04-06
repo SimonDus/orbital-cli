@@ -1,6 +1,3 @@
-
-type Meters = i32;
-
 struct Satelitte {
     name: String,
     line_1: String,
@@ -10,5 +7,5 @@ struct Satelitte {
 struct GroundStation {
     latitude: f64,
     longitude: f64,
-    altitude: Meters,
+    altitude: f64,
 }

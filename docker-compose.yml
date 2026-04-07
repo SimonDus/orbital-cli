@@ -1,0 +1,10 @@
+name: orbital-sat
+services:
+  sat-track:
+    context: .
+    dockerfile: docker/DockerFile
+  env_file:
+    - .env
+  volumes:
+    - ./orbital:app
+    - ./docker/entrypoint.sh:ro

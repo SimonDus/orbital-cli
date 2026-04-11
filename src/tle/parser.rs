@@ -1,8 +1,8 @@
 use crate::cli::PositionArgs;
 use crate::domain::Satellite;
+use itertools::Itertools;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Error};
-use itertools::Itertools;
 
 #[allow(unused)]
 pub fn parse_full_tle_file(args: PositionArgs) -> Result<Vec<Satellite>, Error> {
@@ -24,7 +24,6 @@ pub fn parse_full_tle_file(args: PositionArgs) -> Result<Vec<Satellite>, Error> 
     }
     Ok(satellites_vec)
 }
-
 
 fn tle_file_reader(args: &PositionArgs) -> Result<BufReader<File>, Error> {
     let tle_file = File::open(&args.tle)?;
@@ -49,9 +48,11 @@ pub fn parse_tle_file(args: &PositionArgs) -> Result<Vec<Satellite>, String> {
         }
     }
 
-
     if satellites_vec.is_empty() {
-        Err(format!("No satellite found with the given name {}", args.name))
+        Err(format!(
+            "No satellite found with the given name {}",
+            args.name
+        ))
     } else {
         Ok(satellites_vec)
     }

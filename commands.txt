@@ -1,0 +1,1 @@
+position --tle stations.txt --name YOTSUBA-KULOVER --lat 50 --lon 4 --alt 10

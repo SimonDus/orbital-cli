@@ -1,15 +1,15 @@
 mod cli;
-pub mod domain;
+mod commands;
+mod domain;
 mod tle;
-use tle::parser::parse_tle_file;
-
+use commands::run_position;
 
 fn main() {
     let cli = cli::parse();
 
     match &cli.command {
         cli::Commands::Position(args) => {
-            println!("from main: {:?}", parse_tle_file(args));
+            run_position(args);
         }
     }
 }

@@ -25,14 +25,14 @@ pub fn run_position(args: &PositionArgs) {
             for sat in &pos_request.satellites{
                 let selected = SelectedSatelliteRequest {
                     satellite: sat.clone(),
-                    ground_station: gs.clone(),
-                    observation_time: Utc::now()
+                    ground_station: pos_request.ground_station.clone(),
+                    observation_time: pos_request.observation_time.clone()
 
-                }
+                };
 
+                println!("{:?}", &selected)
             }
-
-            println!("{:?}", &pos_request);
+            
         }
         Err(err) => {
             println!("{}", err)

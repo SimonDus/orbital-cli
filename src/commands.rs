@@ -1,7 +1,8 @@
-use crate::cli::PositionArgs;
+use crate::{cli::PositionArgs};
 use crate::domain::ground_station::GroundStation;
 use crate::domain::position_request::PositionRequest;
 use crate::tle::parser::parse_tle_file;
+use crate::domain::selected_satellite_request::SelectedSatelliteRequest;
 use chrono::{Utc};
 
 pub fn run_position(args: &PositionArgs) {
@@ -19,7 +20,19 @@ pub fn run_position(args: &PositionArgs) {
                 observation_time: Utc::now(),
             };
 
-            println!("{:?}", pos_request);
+
+
+            for sat in &pos_request.satellites{
+                let selected = SelectedSatelliteRequest {
+                    satellite: sat.clone(),
+                    ground_station: gs.clone(),
+                    observation_time: Utc::now()
+
+                }
+
+            }
+
+            println!("{:?}", &pos_request);
         }
         Err(err) => {
             println!("{}", err)

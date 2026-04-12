@@ -6,4 +6,4 @@ pub use ground_station::GroundStation;
 
 pub mod position_request;
 pub mod selected_satellite_request;
-pub use selected_satellite_request::SatelliteSelection;
+pub use selected_satellite_request::SelectedSatelliteRequest;
